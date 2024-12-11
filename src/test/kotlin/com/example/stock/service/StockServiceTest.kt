@@ -48,7 +48,7 @@ class StockServiceTest {
 
 
     @Test
-    @DisplayName("동시 100개 요청(실패)")
+    @DisplayName("동시 100개 요청(성공)")
     fun decreaseWithMultiThread() {
         // given
         val savedStockId = stockRepository.saveAndFlush(Stock.create(1L, 100)).id!!
