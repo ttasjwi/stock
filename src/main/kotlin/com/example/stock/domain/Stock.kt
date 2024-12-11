@@ -6,7 +6,7 @@ import jakarta.persistence.*
 @Table(name = "stocks")
 class Stock(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="stock_id")
+    @Column(name = "stock_id")
     var id: Long? = null,
 
     @Column(name = "product_id")
@@ -14,14 +14,16 @@ class Stock(
 
     @Column(name = "quantity")
     var quantity: Long,
+
+    @Version
+    var version: Long,
 ) {
 
     companion object {
         fun create(productId: Long, quantity: Long): Stock {
-            return Stock(null, productId, quantity)
+            return Stock(null, productId, quantity, 0)
         }
     }
-
 
     fun decrease(quantity: Long) {
         if (this.quantity - quantity < 0) {
