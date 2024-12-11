@@ -11,7 +11,7 @@ import org.springframework.data.repository.findByIdOrNull
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class StockServiceTest : IntegrationTest() {
+class PessimisticLockStockServiceTest : IntegrationTest() {
 
     @BeforeEach
     fun setup() {
@@ -28,7 +28,7 @@ class StockServiceTest : IntegrationTest() {
     fun decreaseTest() {
         // given
         // when
-        stockService.decrease(savedStockId, 1L)
+        pessimisticLockStockService.decrease(savedStockId, 1L)
 
         // then
         val findStock = stockRepository.findByIdOrNull(savedStockId)!!
@@ -50,7 +50,7 @@ class StockServiceTest : IntegrationTest() {
         for (i in 1..threadCount) {
             executorsService.submit {
                 try {
-                    stockService.decrease(savedStockId, 1L)
+                    pessimisticLockStockService.decrease(savedStockId, 1L)
                 } finally {
                     countDownLatch.countDown()
                 }

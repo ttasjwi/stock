@@ -1,10 +1,9 @@
 package com.example.stock
 
+import com.example.stock.support.IntegrationTest
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
-class StockApplicationTests {
+class StockApplicationTests : IntegrationTest() {
 
     @Test
     fun contextLoads() {
