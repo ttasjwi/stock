@@ -1,4 +1,4 @@
-package com.example.stock.service
+package com.example.stock.facade
 
 import com.example.stock.domain.Stock
 import com.example.stock.support.IntegrationTest
@@ -11,7 +11,7 @@ import org.springframework.data.repository.findByIdOrNull
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class StockServiceTest : IntegrationTest() {
+class NamedLockStockFacadeTest : IntegrationTest() {
 
     @BeforeEach
     fun setup() {
@@ -28,7 +28,7 @@ class StockServiceTest : IntegrationTest() {
     fun decreaseTest() {
         // given
         // when
-        stockService.decrease(savedStockId, 1L)
+        namedLockStockFacade.decrease(savedStockId, 1L)
 
         // then
         val findStock = stockRepository.findByIdOrNull(savedStockId)!!
@@ -43,14 +43,14 @@ class StockServiceTest : IntegrationTest() {
         val savedStockId = stockRepository.saveAndFlush(Stock.create(1L, 100)).id!!
 
         val threadCount = 100
-        val executorsService = Executors.newFixedThreadPool(threadCount)
+        val executorsService = Executors.newFixedThreadPool(32)
         val countDownLatch = CountDownLatch(threadCount)
 
         // when
         for (i in 1..threadCount) {
             executorsService.submit {
                 try {
-                    stockService.decrease(savedStockId, 1L)
+                    namedLockStockFacade.decrease(savedStockId, 1L)
                 } finally {
                     countDownLatch.countDown()
                 }

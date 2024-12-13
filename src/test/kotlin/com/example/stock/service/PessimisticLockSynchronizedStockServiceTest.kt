@@ -11,7 +11,7 @@ import org.springframework.data.repository.findByIdOrNull
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class PessimisticLockStockServiceTest : IntegrationTest() {
+class PessimisticLockSynchronizedStockServiceTest : IntegrationTest() {
 
     @BeforeEach
     fun setup() {
