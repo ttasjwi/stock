@@ -3,6 +3,7 @@ package com.example.stock.support
 import com.example.stock.facade.LettuceLockStockFacade
 import com.example.stock.facade.NamedLockStockFacade
 import com.example.stock.facade.OptimisticLockStockFacade
+import com.example.stock.facade.RedissonLockStockFacade
 import com.example.stock.repository.StockRepository
 import com.example.stock.service.PessimisticLockStockService
 import com.example.stock.service.SynchronizedStockService
@@ -26,6 +27,9 @@ class IntegrationTest {
 
     @Autowired
     protected lateinit var lettuceLockStockFacade: LettuceLockStockFacade
+
+    @Autowired
+    protected lateinit var redissonLockStockFacade: RedissonLockStockFacade
 
     @Autowired
     protected lateinit var stockRepository: StockRepository
