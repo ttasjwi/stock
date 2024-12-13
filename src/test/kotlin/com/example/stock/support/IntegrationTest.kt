@@ -1,5 +1,6 @@
 package com.example.stock.support
 
+import com.example.stock.facade.LettuceLockStockFacade
 import com.example.stock.facade.NamedLockStockFacade
 import com.example.stock.facade.OptimisticLockStockFacade
 import com.example.stock.repository.StockRepository
@@ -22,6 +23,9 @@ class IntegrationTest {
 
     @Autowired
     protected lateinit var namedLockStockFacade: NamedLockStockFacade
+
+    @Autowired
+    protected lateinit var lettuceLockStockFacade: LettuceLockStockFacade
 
     @Autowired
     protected lateinit var stockRepository: StockRepository
